@@ -4,6 +4,9 @@ using MediatR;
 
 namespace Articles.Application.Abstractions.Queries.Catalogs;
 
+/// <summary>
+/// Команда запрашивающая.
+/// </summary>
 public class SectionTagsQuery : IRequest<CountResult<ArticleDto>>
 {
     /// <summary>

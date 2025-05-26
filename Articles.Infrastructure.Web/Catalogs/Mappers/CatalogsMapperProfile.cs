@@ -1,5 +1,5 @@
 using Articles.Infrastructure.Web.Catalogs.InputModels;
-using Articles.Application.Abstractions.Commands.Catalogs;
+using Articles.Application.Abstractions.Queries.Catalogs;
 
 namespace Articles.Infrastructure.Web.Catalogs.Mappers;
 
@@ -11,6 +11,6 @@ public class CatalogsMapperProfile : AutoMapper.Profile
     public CatalogsMapperProfile()
     {
         // Карта для CreateArticleRequest в CreateArticleCommand
-        CreateMap<SectionTagsRequest, SectionTagsCommand>();
+        CreateMap<SectionTagsRequest, SectionTagsQuery>();
     }
 }
