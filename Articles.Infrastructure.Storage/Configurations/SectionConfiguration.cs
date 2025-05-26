@@ -21,14 +21,10 @@ public class SectionConfiguration : IEntityTypeConfiguration<SectionAggregate>
         // Устанавливаем первичный ключ
         builder.HasKey(r => r.Id);
         
-        // Устанавливаем ограничения для свойства Comment
-        builder.Property(r => r.Comment)
-            .HasMaxLength(1500); // Максимальная длина 1500 символов
-        
-        // Настраиваем связь many-to-one с сущностью User
-        builder.HasOne(r => r.User) // У отчёта может быть только один пользователь
-            .WithMany(u => u.Reports) // У пользователя может быть много отчётов
-            .HasForeignKey(r => r.UserId) // Внешний ключ в Report
-            .OnDelete(DeleteBehavior.Cascade); // Каскадное удаление
+        //
+        builder.PrimitiveCollection(a => a.Tags);
+
+        //
+        builder.HasIndex(p => p.TagsHash).IsUnique();
     }
 }

@@ -1,0 +1,7 @@
+﻿services:
+  articles.start:
+    image: articles.start
+    build:
+      context: .
+      dockerfile: Articles.Start/Dockerfile
+

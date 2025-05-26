@@ -25,13 +25,14 @@ public class ArticleDto
     /// </summary>
     public required string Content { get; set; }
     
+
     /// <summary>
     /// Дата создания статьи.
     /// </summary>
-    public required DateTime Created { get; set; }
-    
+    public required DateTime CreatedAt { get; init; }
+
     /// <summary>
     /// Дата последнего обновления статьи.
     /// </summary>
-    public DateTime? LastEdited { get; set; }
+    public DateTime? UpdatedAt { get; init; }
 }

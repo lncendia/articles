@@ -7,10 +7,20 @@ namespace Articles.Application.Abstractions.Queries.Catalogs;
 /// <summary>
 /// Команда запрашивающая.
 /// </summary>
-public class SectionTagsQuery : IRequest<CountResult<ArticleDto>>
+public class ArticlesQuery : IRequest<CountResult<ArticleDto>>
 {
     /// <summary>
     /// Коллекция уникальных тэгов.
     /// </summary>
-    public List<string>? Tags { get; init; }
+    public required Guid SectionId { get; init; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public required int Skip { get; init; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public required int Take { get; init; }
 }

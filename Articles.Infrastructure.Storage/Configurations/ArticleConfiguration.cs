@@ -21,10 +21,10 @@ public class ArticleConfiguration : IEntityTypeConfiguration<ArticleAggregate>
         // Устанавливаем первичный ключ
         builder.HasKey(r => r.Id);
 
-        // Настраиваем связь many-to-one с сущностью Report
-        builder.HasOne<Report>() // Указывает на последний импортированный отчёт
-            .WithMany() // Каждый отчёт может быть последним
-            .HasForeignKey(u => u.LastExportedReportId) // Внешний ключ в Exporter
-            .OnDelete(DeleteBehavior.SetNull); // Установка внешнего ключа в null при удалении отчёта
+        //
+        builder.PrimitiveCollection(a => a.Tags);
+
+        //
+        builder.HasIndex(p => p.TagsHash);
     }
 }

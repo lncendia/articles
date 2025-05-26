@@ -15,8 +15,9 @@ public class ArticlesMapperProfile : AutoMapper.Profile
     {
         // Карта для CreateArticleRequest в CreateArticleCommand
         CreateMap<CreateArticleRequest, CreateArticleCommand>();
-        
+
         // Карта для UpdateArticleRequest в UpdateArticleCommand
-        CreateMap<UpdateArticleRequest, UpdateArticleCommand>();
+        CreateMap<UpdateArticleRequest, UpdateArticleCommand>().ForMember(dest => dest.Id,
+            opt => opt.MapFrom((_, _, _, context) => context.Items["Id"]));
     }
 }

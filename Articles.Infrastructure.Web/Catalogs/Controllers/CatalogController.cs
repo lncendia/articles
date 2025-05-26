@@ -23,7 +23,7 @@ public class CatalogController(ISender mediator, IMapper mapper) : ControllerBas
     [HttpGet("Articles")]
     public async Task<CountResult<ArticleDto>> GetArticlesInSection([FromBody] SectionTagsRequest request, CancellationToken token)
     {
-        var query = mapper.Map<SectionTagsQuery>(request);
+        var query = mapper.Map<ArticlesQuery>(request);
         
         return await mediator.Send(query, token);
     }

@@ -15,7 +15,7 @@ public class CreateArticleCommand : IRequest<Guid>
     /// <summary>
     /// Список тэгов статьи.
     /// </summary>
-    public List<string>? Tags { get; init; }
+    public required string[] Tags { get; init; }
     
     /// <summary>
     /// Содержание статьи.

@@ -2,6 +2,9 @@ using MediatR;
 using Articles.Application.Abstractions.Commands.Articles;
 using Articles.Domain;
 using Articles.Domain.Articles;
+using Articles.Domain.Catalogs;
+using Microsoft.EntityFrameworkCore;
+using SmartBot.Abstractions.Interfaces.Utils;
 
 namespace Articles.Application.Services.CommandHandlers.Articles;
 
@@ -10,7 +13,8 @@ namespace Articles.Application.Services.CommandHandlers.Articles;
 /// </summary>
 /// <param name="uow">Единица работы</param>
 public class CreateArticleCommandHandler(
-    IUnitOfWork uow) : IRequestHandler<CreateArticleCommand, Guid>
+    IUnitOfWork uow,
+    IDateTimeProvider timeProvider) : IRequestHandler<CreateArticleCommand, Guid>
 {
     /// <summary>
     /// Метод обработчик команды для создания статьи.
@@ -20,21 +24,33 @@ public class CreateArticleCommandHandler(
     public async Task<Guid> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
     {
         // Создаём агрегат статьи с новыми данными
-        var articleAggregate = new ArticleAggregate{
-            Id = Guid.NewGuid(),
-            Created = DateTime.Now,
+        var article = new ArticleAggregate
+        {
+            CreatedAt = timeProvider.Now,
             Title = request.Title,
-            Content = request.Content,
-            Tags = request.Tags!.ToHashSet()
+            Content = request.Content
         };
+
+        //
+        article.SetTags(request.Tags);
+
+        var containsSection = await uow.Query<SectionAggregate>()
+            .AnyAsync(s => s.TagsHash == article.TagsHash, cancellationToken: cancellationToken);
+
+        if (!containsSection)
+        {
+            var section = new SectionAggregate();
+            section.SetTags(article.Tags);
+            await uow.AddAsync(section, cancellationToken);
+        }
         
         // Добавляем агрегат в контекст базы данных
-        await uow.AddAsync(articleAggregate, cancellationToken);
-        
+        await uow.AddAsync(article, cancellationToken);
+
         // Сохраняем изменения в базе данных
         await uow.SaveChangesAsync(cancellationToken);
 
         // Возвращаем идентификатор созданной статьи
-        return articleAggregate.Id;
+        return article.Id;
     }
 }
