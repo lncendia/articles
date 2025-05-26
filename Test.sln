@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Start", "Test.Start\Test.Start.csproj", "{D1A17C40-B1DD-4F02-8BE5-672883EA88A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Start", "Articles.Start\Articles.Start.csproj", "{D1A17C40-B1DD-4F02-8BE5-672883EA88A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{53F90F12-82BB-4E97-B26C-DEDAFC42BDC1}"
 EndProject
@@ -8,17 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{17C013
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D246A8BD-F228-4BA3-AD03-D927D44530EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Infrastructure.Services", "Test.Infrastructure.Services\Test.Infrastructure.Services.csproj", "{4A91F6C0-757E-4698-988F-8906B1C7F171}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Infrastructure.Storage", "Articles.Infrastructure.Storage\Articles.Infrastructure.Storage.csproj", "{7B5D8231-C474-4417-945A-A2F2C7F2E727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Infrastructure.Storage", "Test.Infrastructure.Storage\Test.Infrastructure.Storage.csproj", "{7B5D8231-C474-4417-945A-A2F2C7F2E727}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Domain", "Articles.Domain\Articles.Domain.csproj", "{DFC97794-60FB-433D-B3F7-725762089E25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Domain", "Test.Domain\Test.Domain.csproj", "{DFC97794-60FB-433D-B3F7-725762089E25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Application.Abstractions", "Articles.Application.Abstractions\Articles.Application.Abstractions.csproj", "{AC071140-B6FB-450C-BAC5-F4F9B325E2E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Application.Abstractions", "Test.Application.Abstractions\Test.Application.Abstractions.csproj", "{AC071140-B6FB-450C-BAC5-F4F9B325E2E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Application.Services", "Articles.Application.Services\Articles.Application.Services.csproj", "{E7CB9E2D-5884-4035-8796-1EAC41A576BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Application.Services", "Test.Application.Services\Test.Application.Services.csproj", "{E7CB9E2D-5884-4035-8796-1EAC41A576BA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Infrastructure.Web", "Test.Infrastructure.Web\Test.Infrastructure.Web.csproj", "{98F857DA-31E2-43A3-A39E-DD964A81E923}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articles.Infrastructure.Web", "Articles.Infrastructure.Web\Articles.Infrastructure.Web.csproj", "{98F857DA-31E2-43A3-A39E-DD964A81E923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,10 +28,6 @@ Global
 		{D1A17C40-B1DD-4F02-8BE5-672883EA88A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1A17C40-B1DD-4F02-8BE5-672883EA88A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1A17C40-B1DD-4F02-8BE5-672883EA88A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A91F6C0-757E-4698-988F-8906B1C7F171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A91F6C0-757E-4698-988F-8906B1C7F171}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A91F6C0-757E-4698-988F-8906B1C7F171}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A91F6C0-757E-4698-988F-8906B1C7F171}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B5D8231-C474-4417-945A-A2F2C7F2E727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B5D8231-C474-4417-945A-A2F2C7F2E727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B5D8231-C474-4417-945A-A2F2C7F2E727}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,7 +50,6 @@ Global
 		{98F857DA-31E2-43A3-A39E-DD964A81E923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{4A91F6C0-757E-4698-988F-8906B1C7F171} = {53F90F12-82BB-4E97-B26C-DEDAFC42BDC1}
 		{7B5D8231-C474-4417-945A-A2F2C7F2E727} = {53F90F12-82BB-4E97-B26C-DEDAFC42BDC1}
 		{DFC97794-60FB-433D-B3F7-725762089E25} = {17C0138F-1DDF-4E85-BB06-DBA3D4F0E7EB}
 		{AC071140-B6FB-450C-BAC5-F4F9B325E2E4} = {D246A8BD-F228-4BA3-AD03-D927D44530EF}
