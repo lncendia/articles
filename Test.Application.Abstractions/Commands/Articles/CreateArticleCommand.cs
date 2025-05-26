@@ -11,20 +11,20 @@ public class CreateArticleCommand : IRequest
     /// <summary>
     /// Уникальный идентификатор статьи.
     /// </summary>
-    public Guid Id { get; init; } = Guid.NewGuid();
+    public required Guid Id { get; init; } = Guid.NewGuid();
     
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
-    public string Title { get; set; }
+    public required string Title { get; set; }
     
     /// <summary>
     /// Список тэгов статьи.
     /// </summary>
-    public List<string> Tags { get; set; }
+    public List<string>? Tags { get; set; }
     
     /// <summary>
     /// Содержание статьи.
     /// </summary>
-    public string Content { get; set; }
+    public required string Content { get; set; }
 }
