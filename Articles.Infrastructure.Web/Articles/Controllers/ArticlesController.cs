@@ -11,7 +11,7 @@ namespace Articles.Infrastructure.Web.Articles.Controllers
     public class ArticlesController(ISender mediator, IMapper mapper) : ControllerBase
     {
         // Получить статью по идентификатору
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         public IActionResult GetArticleById(Guid id)
         {
             return Ok(); // Реализация не требуется
@@ -19,6 +19,7 @@ namespace Articles.Infrastructure.Web.Articles.Controllers
 
         // Создать статью
         [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> CreateArticle([FromBody] CreateArticleRequest request, CancellationToken token)
         {
             var command = mapper.Map<CreateArticleCommand>(request);
@@ -29,7 +30,7 @@ namespace Articles.Infrastructure.Web.Articles.Controllers
         }
 
         // Изменить статью
-        [HttpPut("{id}")]
+        [HttpPost("{id:guid}")]
         public async Task<IActionResult> UpdateArticle(Guid id, [FromBody] UpdateArticleRequest request, CancellationToken token)
         {
             var command = mapper.Map<UpdateArticleCommand>(request, options =>
