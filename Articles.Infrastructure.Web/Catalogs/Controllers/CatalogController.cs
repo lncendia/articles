@@ -5,17 +5,17 @@ namespace Articles.Infrastructure.Web.Catalogs.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CatalogsController : ControllerBase
+public class CatalogController : ControllerBase
 {
     // Получить список разделов
-    [HttpGet("sections")]
+    [HttpGet]
     public IActionResult GetSections()
     {
         return Ok();
     }
 
     // Получить список статей в разделе по тэгам
-    [HttpPost("sections/articles")]
+    [HttpGet("Articles")]
     public IActionResult GetArticlesInSection([FromBody] SectionTagsRequest request)
     {
         return Ok();
