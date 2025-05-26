@@ -46,6 +46,16 @@ public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IE
                 // Добавляем состояние клиента в дополнительные данные для дальнейшего анализа
                 extensions["articleId"] = ex.ArticleId;
                 break;
+        
+            // Если исключение типа ArticleNotFound
+            case ConfigurationException ex:
+
+                // Формируем сообщение об ошибке с указанием текущего состояния клиента
+                message = "The configuration does not contain a path.";
+
+                // Добавляем состояние клиента в дополнительные данные для дальнейшего анализа
+                extensions["path"] = ex.Path;
+                break;
             
             // Если исключение не относится к указанным выше типам
             default:
