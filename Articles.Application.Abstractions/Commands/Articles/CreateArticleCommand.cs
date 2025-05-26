@@ -5,13 +5,8 @@ namespace Articles.Application.Abstractions.Commands.Articles;
 /// <summary>
 /// Команда для создания статьи.
 /// </summary>
-public class CreateArticleCommand : IRequest
+public class CreateArticleCommand : IRequest<Guid>
 {
-    /// <summary>
-    /// Уникальный идентификатор статьи.
-    /// </summary>
-    public required Guid Id { get; init; } = Guid.NewGuid();
-    
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
@@ -25,5 +20,5 @@ public class CreateArticleCommand : IRequest
     /// <summary>
     /// Содержание статьи.
     /// </summary>
-    public required string Content { get; set; }
+    public required string Content { get; init; }
 }

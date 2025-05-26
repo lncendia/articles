@@ -10,20 +10,20 @@ public class UpdateArticleCommand : IRequest
     /// <summary>
     /// Уникальный идентификатор статьи.
     /// </summary>
-    public required Guid Id { get; set; }
+    public required Guid Id { get; init; }
     
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
-    public string? Title { get; set; }
+    public string? Title { get; init; }
     
     /// <summary>
     /// Список тэгов статьи.
     /// </summary>
-    public List<string>? Tags { get; set; }
+    public List<string>? Tags { get; init; }
     
     /// <summary>
-    /// Содержание статьи.
+    /// /// Содержание статьи.
     /// </summary>
-    public string? Content { get; set; }
+    public string? Content { get; init; }
 }
