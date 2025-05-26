@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using MediatR;
 
 namespace Articles.Application.Abstractions.Commands.Articles;
@@ -16,12 +15,12 @@ public class CreateArticleCommand : IRequest
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
-    public required string Title { get; set; }
+    public required string Title { get; init; }
     
     /// <summary>
     /// Список тэгов статьи.
     /// </summary>
-    public List<string>? Tags { get; set; }
+    public List<string>? Tags { get; init; }
     
     /// <summary>
     /// Содержание статьи.
