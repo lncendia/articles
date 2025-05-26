@@ -11,6 +11,6 @@ public class CatalogsMapperProfile : AutoMapper.Profile
     public CatalogsMapperProfile()
     {
         // Карта для CreateArticleRequest в CreateArticleCommand
-        CreateMap<SectionTagsRequest, ArticlesQuery>();
+        CreateMap<ArticlesRequest, ArticlesQuery>();
     }
 }

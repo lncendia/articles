@@ -1,4 +1,5 @@
 using System.Net;
+using Articles.Abstractions.Interfaces.Utils.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -36,189 +37,14 @@ public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IE
         // Обработка исключения в зависимости от его типа
         switch (exception)
         {
-            // Если исключение типа InstanceNotFoundException
-            case InstanceNotFoundException ex:
+            // Если исключение типа ArticleNotFound
+            case ArticleNotFoundException ex:
 
                 // Формируем сообщение об ошибке с указанием текущего состояния клиента
-                message = localizer["InstanceNotFound"];
+                message = "Article not found.";
 
                 // Добавляем состояние клиента в дополнительные данные для дальнейшего анализа
-                extensions["instanceId"] = ex.InstanceId;
-                break;
-
-            // Если исключение типа NoServersAvailableException
-            case NoServersAvailableException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["NoServersAvailable"];
-
-                // Добавляем сообщение об ошибке ServerType в дополнительные данные
-                extensions["serverType"] = ex.ServerType;
-                break;
-
-            // Если исключение типа UserNotFoundException
-            case UserNotFoundException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["UserNotFound"];
-
-                // Добавляем сообщение об ошибке UserId в дополнительные данные
-                extensions["userId"] = ex.UserId;
-                break;
-
-            // Если исключение типа WorkspaceNotFoundException
-            case WorkspaceNotFoundException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspaceNotFound"];
-
-                // Добавляем сообщение об ошибке WorkspaceId в дополнительные данные
-                extensions["workspaceId"] = ex.WorkspaceId;
-                break;
-
-            // Если исключение типа ServerOverloadedException
-            case ServerOverloadedException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["ServerOverloaded"];
-
-                // Добавляем сообщение об ошибке ServerId в дополнительные данные
-                extensions["serverId"] = ex.ServerId;
-                break;
-
-            // Если исключение типа DuplicateInvitationIdException
-            case DuplicateInvitationIdException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["DuplicateInvitationId"];
-
-                // Добавляем сообщение об ошибке InvitationId в дополнительные данные
-                extensions["invitationId"] = ex.InvitationId;
-
-                break;
-
-            // Если исключение типа DuplicateRoleNameException
-            case DuplicateRoleNameException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["DuplicateRoleName"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["roleName"] = ex.RoleName;
-
-                break;
-
-            // Если исключение типа DuplicateGroupNameException
-            case DuplicateGroupNameException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["DuplicateGroupName"];
-
-                // Добавляем сообщение об ошибке Name в дополнительные данные
-                extensions["name"] = ex.Name;
-
-                break;
-            
-            // Если исключение типа UserAlreadyInWorkspaceException
-            case UserAlreadyInWorkspaceException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["UserAlreadyInWorkspace"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["userId"] = ex.UserId;
-
-                break;
-            
-            // Если исключение типа WorkspaceRoleCannotBeDeletedException
-            case WorkspaceRoleCannotBeDeletedException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspaceRoleCannotBeDeleted"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["roleName"] = ex.RoleName;
-
-                break;
-            
-            // Если исключение типа InvalidPermissionTypeException
-            case InvalidPermissionTypeException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["InvalidPermissionType"];
-
-                // Добавляем сообщение об ошибке PermissionKey в дополнительные данные
-                extensions["permissionKey"] = ex.PermissionKey;
-
-                // Добавляем сообщение об ошибке ExpectedType в дополнительные данные
-                extensions["expectedType"] = ex.ExpectedType;
-
-                // Добавляем сообщение об ошибке ActualType в дополнительные данные
-                extensions["actualType"] = ex.ActualType;
-
-                break;
-
-            // Если исключение типа WorkspaceGroupNotFoundException
-            case WorkspaceGroupNotFoundException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspaceGroupNotFound"];
-
-                // Добавляем сообщение об ошибке Name в дополнительные данные
-                extensions["name"] = ex.Name;
-
-                break;
-
-            // Если исключение типа WorkspacePermissionDeniedException
-            case WorkspacePermissionDeniedException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspacePermissionDenied"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["roleName"] = ex.RoleName;
-
-                // Добавляем сообщение об ошибке RequiredPermission в дополнительные данные
-                extensions["requiredPermission"] = ex.RequiredPermission;
-
-                break;
-
-            // Если исключение типа WorkspaceRoleNotFoundException
-            case WorkspaceRoleNotFoundException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspaceRoleNotFound"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["roleName"] = ex.RoleName;
-
-                break;
-
-            // Если исключение типа WorkspaceUserNotFoundException
-            case WorkspaceUserNotFoundException ex:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["WorkspaceUserNotFound"];
-
-                // Добавляем сообщение об ошибке RoleName в дополнительные данные
-                extensions["userId"] = ex.UserId;
-
-                break;
-
-            // Если исключение типа CannotSpecifyBothAccessException
-            case CannotSpecifyBothAccessException:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["CannotSpecifyBothAccess"];
-
-                break;
-
-            // Если исключение типа InvalidValuesInAccessibleListException
-            case InvalidValuesInAccessibleListException:
-
-                // Формируем сообщение об ошибке для клиента
-                message = localizer["InvalidValuesInAccessibleList"];
-
+                extensions["articleId"] = ex.ArticleId;
                 break;
             
             // Если исключение не относится к указанным выше типам

@@ -1,6 +1,6 @@
 namespace Articles.Infrastructure.Web.Catalogs.InputModels;
 
-public class SectionTagsRequest
+public class ArticlesRequest
 {
     /// <summary>
     /// Коллекция уникальных тэгов.

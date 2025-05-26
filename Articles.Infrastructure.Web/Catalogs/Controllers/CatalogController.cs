@@ -14,14 +14,15 @@ public class CatalogController(ISender mediator, IMapper mapper) : ControllerBas
 {
     // Получить список разделов
     [HttpGet]
-    public IActionResult GetSections()
+    public IActionResult GetCatalogs()
     {
+        
         return Ok();
     }
 
     // Получить список статей в разделе по тэгам
     [HttpGet("Articles")]
-    public async Task<CountResult<ArticleDto>> GetArticlesInSection([FromBody] SectionTagsRequest request, CancellationToken token)
+    public async Task<CountResult<ArticleDto>> GetArticlesInSection([FromBody] ArticlesRequest request, CancellationToken token)
     {
         var query = mapper.Map<ArticlesQuery>(request);
         

@@ -31,7 +31,7 @@ public class ArticleAggregate
     /// <summary>
     /// Дата последнего обновления статьи.
     /// </summary>
-    public DateTime? UpdatedAt { get; init; }
+    public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
     /// Коллекция уникальных тэгов.

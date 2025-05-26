@@ -3,6 +3,8 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Articles.Application.Abstractions.Commands.Articles;
+using Articles.Application.Abstractions.DTOs.Articles;
+using Articles.Application.Abstractions.Queries.Articles;
 
 namespace Articles.Infrastructure.Web.Articles.Controllers;
 
@@ -12,9 +14,14 @@ public class ArticleController(ISender mediator, IMapper mapper) : ControllerBas
 {
     // Получить статью по идентификатору
     [HttpGet("{id:guid}")]
-    public IActionResult GetArticleById(Guid id)
+    public async Task<ArticleDto> GetArticleById(Guid id, CancellationToken token)
     {
-        return Ok(); // Реализация не требуется
+        var query = new GetArticleByIdQuery
+        {
+            ArticleId = id
+        };
+        
+        return await mediator.Send(query, token); // Реализация не требуется
     }
 
     // Создать статью
