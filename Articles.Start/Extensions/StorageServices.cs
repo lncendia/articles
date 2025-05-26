@@ -14,17 +14,16 @@ public static class StorageServices
     /// Расширяющий метод для регистрации сервисов хранилища в коллекции служб.
     /// Метод настраивает зависимости для работы с базами данных, файловым хранилищем и другими компонентами системы.
     /// </summary>
-    /// <param name="services">Коллекция служб, в которую будут добавлены новые сервисы.</param>
-    /// <param name="configuration">Конфигурация приложения, содержащая параметры подключения и пути к хранилищам.</param>
-    public static void AddStorageServices(this IServiceCollection services, IConfiguration configuration)
+    /// <param name="builder">Построитель веб-приложений и сервисов.</param>
+    public static void AddStorageServices(this WebApplicationBuilder builder)
     {
         // Получаем строку подключения к базе данных
-        var database = configuration.GetRequiredValue<string>("ConnectionStrings:Database");
+        var database = builder.Configuration.GetRequiredValue<string>("ConnectionStrings:Database");
 
         // Добавляем контекст базы данных
-        services.AddDbContext<ApplicationDbContext>(opt => { opt.UseNpgsql(database); });
+        builder.Services.AddDbContext<ApplicationDbContext>(opt => { opt.UseNpgsql(database); });
 
         // Добавляем сервис для работы с единицей работы
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

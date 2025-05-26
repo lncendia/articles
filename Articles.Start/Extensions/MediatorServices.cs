@@ -1,3 +1,5 @@
+using Articles.Application.Services.CommandHandlers.Articles;
+
 namespace Articles.Start.Extensions;
 
 ///<summary>
@@ -15,7 +17,7 @@ public static class MediatorServices
         services.AddMediatR(configuration =>
         {
             // Добавляем обработчики из Assembly
-            configuration.RegisterServicesFromAssembly(typeof(CreateInstancesCommandHandler).Assembly);
+            configuration.RegisterServicesFromAssembly(typeof(CreateArticleCommandHandler).Assembly);
         });
     }
 }

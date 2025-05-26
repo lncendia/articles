@@ -1,6 +1,5 @@
 using Articles.Infrastructure.Web.Articles.InputModels;
 using FluentValidation;
-using Microsoft.Extensions.Localization;
 
 namespace Articles.Infrastructure.Web.Articles.Validators;
 
@@ -28,22 +27,22 @@ public class CreateArticleValidator : AbstractValidator<CreateArticleRequest>
 
             // С сообщением
             .WithMessage("Title must not exceed 256 characters.");
+        
+        // Правило для Tags
+        RuleFor(c => c.Tags)
 
-        // Правило для Content
-        RuleFor(c => c.Content)
-            
-            // Не пустое
+            // Не пустая коллекция
             .NotEmpty()
-            
-            // С сообщением
-            .WithMessage("Content is required.")
-            
-            // Максимальная длина 256 символов
-            .MaximumLength(256)
 
             // С сообщением
-            .WithMessage("Content must not exceed 256 characters.");
+            .WithMessage("Tags are required")
 
+            // Не больше 15 тегов
+            .Must(c => c.Length <= 256 )
+
+            // С сообщением
+            .WithMessage("The number of tags cannot exceed 256.");
+        
         // Правило для Tags
         RuleForEach(c => c.Tags)
             
@@ -52,5 +51,6 @@ public class CreateArticleValidator : AbstractValidator<CreateArticleRequest>
 
             // С сообщением
             .WithMessage("Tags must not exceed 256 characters.");
+
     }
 }

@@ -8,24 +8,18 @@ public class ArticleDto
     /// <summary>
     /// Уникальный идентификатор статьи.
     /// </summary>
-    public required Guid Id { get; set; }
+    public required Guid Id { get; init; }
     
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
-    public required string Title { get; set; }
+    public required string Title { get; init; }
     
     /// <summary>
-    /// Список тэгов статьи.
+    /// Список тегов статьи.
     /// </summary>
-    public List<string>? Tags { get; set; }
+    public required IReadOnlyList<string> Tags { get; init; }
     
-    /// <summary>
-    /// Содержание статьи.
-    /// </summary>
-    public required string Content { get; set; }
-    
-
     /// <summary>
     /// Дата создания статьи.
     /// </summary>

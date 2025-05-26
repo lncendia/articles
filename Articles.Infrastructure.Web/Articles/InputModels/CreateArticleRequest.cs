@@ -8,15 +8,10 @@ public class CreateArticleRequest
     /// <summary>
     /// Заголовок статьи.
     /// </summary>
-    public string? Title { get; set; }
-    
+    public string? Title { get; init; }
+
     /// <summary>
-    /// Список тэгов статьи.
+    /// Список тегов статьи.
     /// </summary>
-    public List<string>? Tags { get; set; }
-    
-    /// <summary>
-    /// Содержание статьи.
-    /// </summary>
-    public string? Content { get; set; }
+    public string[] Tags { get; init; } = [];
 }

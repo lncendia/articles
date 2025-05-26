@@ -19,11 +19,6 @@ public class ArticleAggregate
     public required string Title { get; set; }
 
     /// <summary>
-    /// Название статьи.
-    /// </summary>
-    public required string Content { get; set; }
-
-    /// <summary>
     /// Дата создания статьи.
     /// </summary>
     public required DateTime CreatedAt { get; init; }
@@ -34,33 +29,46 @@ public class ArticleAggregate
     public DateTime? UpdatedAt { get; set; }
 
     /// <summary>
-    /// Коллекция уникальных тэгов.
+    /// Коллекция уникальных тегов.
     /// </summary>
-    public HashSet<string> Tags { get; private set; } = null!;
-    
+    public string[] Tags { get; private set; } = null!;
+
     /// <summary>
-    /// 
+    /// Хэш-сумма тегов статьи.
     /// </summary>
     public string TagsHash { get; private set; } = null!;
 
     /// <summary>
-    /// 
+    /// Устанавливает теги для статьи и вычисляет их хэш.
     /// </summary>
-    /// <param name="tags"></param>
+    /// <param name="tags">Коллекция тегов</param>
     public void SetTags(IEnumerable<string> tags)
     {
-        var uniqueSortedTags = tags
-            .Select(tag => tag.Trim())
-            .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(tag => tag, StringComparer.Ordinal)
-            .ToList();
+        // Обрабатываем входные теги
+        var uniqueTags = tags
 
-        Tags = new HashSet<string>(uniqueSortedTags);
+            // Удаляем пробелы в начале и конце каждого тега
+            .Select(tag => tag.Trim())
+
+            // Удаляем дубликаты (без учета регистра)
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+
+            // Преобразуем в список
+            .ToArray();
+
+        // Создаем HashSet из обработанных тегов
+        Tags = uniqueTags;
+
+        // Сортируем теги
+        var uniqueSortedTags = uniqueTags.OrderBy(tag => tag, StringComparer.Ordinal);
 
         // Склеиваем теги с разделителем (например, \0, чтобы исключить слияния)
         var concatenated = string.Join("\0", uniqueSortedTags);
+
+        // Вычисляем SHA256 хэш от объединенных тегов
         var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(concatenated));
 
+        // Конвертируем байты хэша в base64 строку
         TagsHash = Convert.ToBase64String(hashBytes);
     }
 }

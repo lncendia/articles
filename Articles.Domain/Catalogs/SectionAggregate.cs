@@ -14,38 +14,46 @@ public class SectionAggregate
     public Guid Id { get; init; } = Guid.NewGuid();
 
     /// <summary>
-    /// Название раздела.
+    /// Коллекция уникальных тегов.
     /// </summary>
-    public string Name => string.Join(", ", Tags);
+    public string[] Tags { get; private set; } = null!;
 
     /// <summary>
-    /// Коллекция уникальных тэгов.
-    /// </summary>
-    public HashSet<string> Tags { get; private set; } = null!;
-
-    /// <summary>
-    /// 
+    /// Хэш-сумма тегов раздела.
     /// </summary>
     public string TagsHash { get; private set; } = null!;
 
     /// <summary>
-    /// 
+    /// Устанавливает теги для статьи и вычисляет их хэш.
     /// </summary>
-    /// <param name="tags"></param>
+    /// <param name="tags">Коллекция тегов</param>
     public void SetTags(IEnumerable<string> tags)
     {
-        var uniqueSortedTags = tags
+        // Обрабатываем входные теги
+        var uniqueTags = tags
+
+            // Удаляем пробелы в начале и конце каждого тега
             .Select(tag => tag.Trim())
+
+            // Удаляем дубликаты (без учета регистра)
             .Distinct(StringComparer.OrdinalIgnoreCase)
-            .OrderBy(tag => tag, StringComparer.Ordinal)
-            .ToList();
 
-        Tags = new HashSet<string>(uniqueSortedTags);
+            // Преобразуем в список
+            .ToArray();
 
+        // Создаем HashSet из обработанных тегов
+        Tags = uniqueTags;
+
+        // Сортируем теги
+        var uniqueSortedTags = uniqueTags.OrderBy(tag => tag, StringComparer.Ordinal);
+        
         // Склеиваем теги с разделителем (например, \0, чтобы исключить слияния)
         var concatenated = string.Join("\0", uniqueSortedTags);
+
+        // Вычисляем SHA256 хэш от объединенных тегов
         var hashBytes = SHA256.HashData(Encoding.UTF8.GetBytes(concatenated));
 
+        // Конвертируем байты хэша в base64 строку
         TagsHash = Convert.ToBase64String(hashBytes);
     }
 }

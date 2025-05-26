@@ -1,15 +1,14 @@
 using System.Net;
-using Articles.Abstractions.Interfaces.Utils.Exceptions;
+using Articles.Application.Abstractions.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 
 namespace Articles.Start.Exceptions;
 
 /// <summary>
 /// Обработчик исключений, реализующий интерфейс IExceptionHandler.
 /// </summary>
-public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IExceptionHandler
+public class ExceptionHandler : IExceptionHandler
 {
     /// <summary>
     /// Метод обработки исключения.
@@ -40,21 +39,14 @@ public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IE
             // Если исключение типа ArticleNotFound
             case ArticleNotFoundException ex:
 
+                // Устанавливаем статус код 404 (Not Found)
+                statusCode = HttpStatusCode.NotFound;
+                
                 // Формируем сообщение об ошибке с указанием текущего состояния клиента
                 message = "Article not found.";
 
                 // Добавляем состояние клиента в дополнительные данные для дальнейшего анализа
                 extensions["articleId"] = ex.ArticleId;
-                break;
-        
-            // Если исключение типа ArticleNotFound
-            case ConfigurationException ex:
-
-                // Формируем сообщение об ошибке с указанием текущего состояния клиента
-                message = "The configuration does not contain a path.";
-
-                // Добавляем состояние клиента в дополнительные данные для дальнейшего анализа
-                extensions["path"] = ex.Path;
                 break;
             
             // Если исключение не относится к указанным выше типам
@@ -64,7 +56,7 @@ public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IE
                 statusCode = HttpStatusCode.InternalServerError;
 
                 // Формируем общее сообщение об ошибке для клиента
-                message = localizer["default"];
+                message = "Unexpected error.";
                 break;
         }
 
@@ -75,7 +67,7 @@ public class ExceptionHandler(IStringLocalizer<ExceptionHandler> localizer) : IE
         var problemDetails = new ProblemDetails
         {
             // Заголовок ошибки
-            Title = localizer["title"],
+            Title = "Error occurred.",
 
             // Тип ошибки (название исключения без суффикса "Exception")
             Type = exception.GetType().Name.Replace("Exception", ""),

@@ -2,15 +2,15 @@ using Articles.Application.Abstractions.DTOs.Articles;
 using Articles.Application.Abstractions.DTOs.Common;
 using MediatR;
 
-namespace Articles.Application.Abstractions.Queries.Catalogs;
+namespace Articles.Application.Abstractions.Queries.Sections;
 
 /// <summary>
 /// Команда запрашивающая.
 /// </summary>
-public class ArticlesQuery : IRequest<CountResult<ArticleDto>>
+public class GetSectionArticlesQuery : IRequest<CountResult<ArticleDto>>
 {
     /// <summary>
-    /// Коллекция уникальных тэгов.
+    /// Коллекция уникальных тегов.
     /// </summary>
     public required Guid SectionId { get; init; }
     

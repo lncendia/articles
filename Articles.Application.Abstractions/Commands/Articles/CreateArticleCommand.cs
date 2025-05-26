@@ -13,12 +13,7 @@ public class CreateArticleCommand : IRequest<Guid>
     public required string Title { get; init; }
     
     /// <summary>
-    /// Список тэгов статьи.
+    /// Список тегов статьи.
     /// </summary>
     public required string[] Tags { get; init; }
-    
-    /// <summary>
-    /// Содержание статьи.
-    /// </summary>
-    public required string Content { get; init; }
 }

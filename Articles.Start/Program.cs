@@ -8,17 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Регистрируем сервисы логгирования
 builder.AddLoggingServices();
 
+// Добавляем в приложение сервисы для работы с хранилищами
+builder.AddStorageServices();
+
 // Добавление сервисов swagger
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerServices();
 
 // Добавляем сервисы CORS
 builder.Services.AddCorsServices();
-
-// Добавляем в приложение сервисы для работы с хранилищами
-builder.Services.AddStorageServices(builder.Configuration);
-
-// Добавляем сервисы приложения
-builder.Services.AddApplicationServices();
 
 // Добавляем в приложение сервисы для валидации моделей
 builder.Services.AddValidationServices();

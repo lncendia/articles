@@ -1,3 +1,5 @@
+using Articles.Infrastructure.Web.Sections.Mappers;
+
 namespace Articles.Start.Extensions;
 
 ///<summary>
@@ -15,10 +17,7 @@ public static class MappingServices
         services.AddAutoMapper(cfg =>
         {
             // Регистрируем карты для контроллеров
-            cfg.AddMaps(typeof(InstancesMapperProfile).Assembly);
-            
-            // Регистрируем карты для событий
-            cfg.AddMaps(typeof(UsersMapperProfile).Assembly);
+            cfg.AddMaps(typeof(SectionsMapperProfile).Assembly);
         });
     }
 }

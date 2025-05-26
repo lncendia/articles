@@ -1,4 +1,4 @@
-namespace Articles.Abstractions.Interfaces.Utils.Exceptions;
+namespace Articles.Application.Abstractions.Exceptions;
 
 /// <summary>
 /// Исключение возникающие, если статья не была найдена.

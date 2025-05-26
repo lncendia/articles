@@ -8,8 +8,7 @@ public class ConfigurationException : Exception
     /// <summary>
     /// Путь конфигурации
     /// </summary>
-    public required string Path { get; set; }
-
+    public string Path { get; }
     
     /// <summary>
     /// Конструктор исключения

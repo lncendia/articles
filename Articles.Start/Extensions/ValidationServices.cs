@@ -1,3 +1,4 @@
+using Articles.Infrastructure.Web.Sections.Validators;
 using FluentValidation;
 using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
 
@@ -15,7 +16,7 @@ public static class ValidationServices
     public static void AddValidationServices(this IServiceCollection services)
     {
         // Добавляем все валидаторы из Assembly (для получения Assembly передаем один из валидаторов) 
-        services.AddValidatorsFromAssemblyContaining<CreateInstancesValidator>();
+        services.AddValidatorsFromAssemblyContaining<GetArticlesValidator>();
         
         // Добавляем интеграцию валидаторов с валидацией ASP NET
         services.AddFluentValidationAutoValidation();

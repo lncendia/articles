@@ -6,7 +6,7 @@ namespace Articles.Application.Abstractions.Queries.Articles;
 /// <summary>
 /// Запрос на получение статьи по её идентификатору.
 /// </summary>
-public class GetArticleByIdQuery : IRequest<ArticleDto>
+public class GetArticleQuery : IRequest<ArticleDto>
 {
     /// <summary>
     /// Идентификатор статьи.

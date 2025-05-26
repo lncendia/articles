@@ -18,12 +18,7 @@ public class UpdateArticleCommand : IRequest
     public string? Title { get; init; }
     
     /// <summary>
-    /// Список тэгов статьи.
+    /// Список тегов статьи.
     /// </summary>
-    public List<string>? Tags { get; init; }
-    
-    /// <summary>
-    /// /// Содержание статьи.
-    /// </summary>
-    public string? Content { get; init; }
+    public required string[] Tags { get; init; }
 }

@@ -15,10 +15,10 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     /// <param name="modelBuilder">Объект для построения модели базы данных.</param>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Применяем конфигурацию для сущности User
+        // Применяем конфигурацию для сущности Article
         modelBuilder.ApplyConfiguration(new ArticleConfiguration());
 
-        // Применяем конфигурацию для сущности Report
+        // Применяем конфигурацию для сущности Section
         modelBuilder.ApplyConfiguration(new SectionConfiguration());
         
         // Вызываем базовую реализацию метода

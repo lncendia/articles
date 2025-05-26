@@ -21,15 +21,15 @@ public class UpdateArticleValidator : AbstractValidator<UpdateArticleRequest>
 
             // С сообщением
             .WithMessage("Title must not exceed 256 characters.");
+        
+        // Правило для Tags
+        RuleFor(c => c.Tags)
 
-        // Правило для Content
-        RuleFor(c => c.Content)
-            
-            // Максимальная длина 256 символов
-            .MaximumLength(256)
+            // Не больше 15 тегов
+            .Must(c => c.Length <= 256)
 
             // С сообщением
-            .WithMessage("Content must not exceed 256 characters.");
+            .WithMessage("The number of tags cannot exceed 256.");
 
         // Правило для Tags
         RuleForEach(c => c.Tags)
