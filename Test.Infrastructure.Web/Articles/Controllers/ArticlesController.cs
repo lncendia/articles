@@ -1,10 +1,14 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Test.Application.Abstractions.Commands.Articles;
+using Test.Infrastructure.Web.Articles.InputModels;
 
 namespace Test.Infrastructure.Web.Articles.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ArticlesController : ControllerBase
+    public class ArticlesController(ISender mediator, IMapper mapper) : ControllerBase
     {
         // Получить статью по идентификатору
         [HttpGet("{id}")]
@@ -15,56 +19,27 @@ namespace Test.Infrastructure.Web.Articles.Controllers
 
         // Создать статью
         [HttpPost]
-        public IActionResult CreateArticle([FromBody] CreateArticleRequest request)
+        public async Task<IActionResult> CreateArticle([FromBody] CreateArticleRequest request, CancellationToken token)
         {
+            var command = mapper.Map<CreateArticleCommand>(request);
+            
+            await mediator.Send(command, token);
+            
             return Ok();
         }
 
         // Изменить статью
         [HttpPut("{id}")]
-        public IActionResult UpdateArticle(Guid id, [FromBody] UpdateArticleRequest request)
+        public async Task<IActionResult> UpdateArticle(Guid id, [FromBody] UpdateArticleRequest request, CancellationToken token)
         {
+            var command = mapper.Map<UpdateArticleCommand>(request, options =>
+            {
+                options.Items.Add("Id", id);
+            });
+            
+            await mediator.Send(command, token);
+            
             return Ok();
         }
-    }
-
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CatalogController : ControllerBase
-    {
-        // Получить список разделов
-        [HttpGet("sections")]
-        public IActionResult GetSections()
-        {
-            return Ok();
-        }
-
-        // Получить список статей в разделе по тэгам
-        [HttpPost("sections/articles")]
-        public IActionResult GetArticlesInSection([FromBody] SectionTagsRequest request)
-        {
-            return Ok();
-        }
-    }
-
-    // Модели запросов (DTO)
-
-    public class CreateArticleRequest
-    {
-        public string Title { get; set; }
-        public List<string> Tags { get; set; }
-        public string Content { get; set; }
-    }
-
-    public class UpdateArticleRequest
-    {
-        public string Title { get; set; }
-        public List<string> Tags { get; set; }
-        public string Content { get; set; }
-    }
-
-    public class SectionTagsRequest
-    {
-        public List<string> Tags { get; set; }
     }
 }

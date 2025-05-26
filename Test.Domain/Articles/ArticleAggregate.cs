@@ -8,6 +8,11 @@ namespace Test.Domain.Articles;
 public class ArticleAggregate
 {
     /// <summary>
+    /// Идентификатор статьи.
+    /// </summary>
+    public required Guid Id { get; set; }
+    
+    /// <summary>
     /// Название статьи.
     /// </summary>
     public required string Name { get; set; }

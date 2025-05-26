@@ -1,12 +1,17 @@
 using Test.Domain.Tags;
 
-namespace Test.Domain.Sections;
+namespace Test.Domain.Catalogs;
 
 /// <summary>
 /// Агрегат раздела.
 /// </summary>
-public class SectionAggregate
+public class CatalogAggregate
 {
+    /// <summary>
+    /// Идентификатор раздела.
+    /// </summary>
+    public required Guid Id { get; set; }
+    
     /// <summary>
     /// Название раздела.
     /// </summary>
