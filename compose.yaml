@@ -1,0 +1,30 @@
+﻿services:
+  articles.start:
+    image: articles.start
+    build:
+      context: .
+      dockerfile: Articles.Start/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: "DevContainer"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "5000:8080"
+  
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: articles
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - "./volumes/database:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
