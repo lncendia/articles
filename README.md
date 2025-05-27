@@ -78,7 +78,7 @@
 
 ```bash
 # Клонируйте проект
-git clone https://github.com/your-org/Articles.git Articles
+git clone https://gitlab.com/CodeVibeComp/articlestest Articles
 cd Articles
 
 # Запустите приложение в Docker

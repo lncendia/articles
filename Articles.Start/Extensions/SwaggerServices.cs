@@ -52,7 +52,8 @@ public static class SwaggerServices
                 Description = "API для работы со статьями и разделами",
                 Contact = new OpenApiContact
                 {
-                    Name = "Sergei Zakharov"
+                    Name = "Sergei Zakharov",
+                    Email = "sergeizahargood@gmail.com"
                 }
             });
         });
